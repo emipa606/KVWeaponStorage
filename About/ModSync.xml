@@ -1,12 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ModSyncNinjaData>
-  <ModName>Weapon Storage</ModName>
-  <Version>1.3.0.3</Version>
+  <ID>73749d64-1059-415e-893b-21ad1543c3b2</ID>
+  <ModName>[KV] Weapon Storage (Continued)</ModName>
+  <Version>1.4.1</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
-    <Owner>KiameV</Owner>
-    <Project>rimworld-weaponstorage</Project>
-    <DownloadFrom>ModSyncReleases</DownloadFrom>
+    <Owner>emipa606</Owner>
+    <Project>KVWeaponStorage</Project>
+    <AboutDir>About</AboutDir>
+    <DownloadFrom>ModSyncMainPage</DownloadFrom>
     <Branch>master</Branch>
   </Host>
 </ModSyncNinjaData>
+
+
+
+
+
