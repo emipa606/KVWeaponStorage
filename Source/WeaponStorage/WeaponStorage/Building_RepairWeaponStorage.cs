@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using RimWorld;
 using Verse;
@@ -12,9 +13,9 @@ internal class Building_RepairWeaponStorage : Building
 
     private const long THIRTY_SECONDS = 300000000L;
 
-    private static readonly LinkedList<ThingWithComps> AllWeaponsBeingRepaired = new LinkedList<ThingWithComps>();
+    private static readonly LinkedList<ThingWithComps> AllWeaponsBeingRepaired = [];
 
-    private LinkedList<Building_WeaponStorage> AttachedWeaponStorages = new LinkedList<Building_WeaponStorage>();
+    private LinkedList<Building_WeaponStorage> AttachedWeaponStorages = [];
 
     private ThingWithComps beingRepaird;
 
@@ -263,6 +264,11 @@ internal class Building_RepairWeaponStorage : Building
 
     public void Add(Building_WeaponStorage s)
     {
+        if (AttachedWeaponStorages == null)
+        {
+            return;
+        }
+
         if (!AttachedWeaponStorages.Contains(s))
         {
             AttachedWeaponStorages.AddLast(s);
@@ -271,6 +277,11 @@ internal class Building_RepairWeaponStorage : Building
 
     public void Remove(Building_WeaponStorage s)
     {
+        if (AttachedWeaponStorages == null || !AttachedWeaponStorages.Any() || !AttachedWeaponStorages.Contains(s))
+        {
+            return;
+        }
+
         AttachedWeaponStorages.Remove(s);
     }
 }

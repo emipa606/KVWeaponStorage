@@ -6,7 +6,7 @@
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <DebugType>None</DebugType>
     <LangVersion>latest</LangVersion>
-    <FileVersion>1.4.0</FileVersion>
+    <FileVersion>1.4.2</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref">
@@ -20,11 +20,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WeaponStorage\WeaponStorage.csproj" >
-	    <CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
-	    <CopyLocal>False</CopyLocal>
-	    <Private>false</Private>
-	    <ExcludeAssets>all</ExcludeAssets>
+    <ProjectReference Include="..\WeaponStorage\WeaponStorage.csproj">
+      <CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
+      <CopyLocal>False</CopyLocal>
+      <Private>false</Private>
+      <ExcludeAssets>all</ExcludeAssets>
     </ProjectReference>
   </ItemGroup>
 </Project>

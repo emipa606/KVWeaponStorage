@@ -13,9 +13,9 @@ public class AssignedWeaponContainer : IExposable
 
     private List<AssignedWeapon> tmp;
 
-    public HashSet<int> weaponIds = new HashSet<int>();
+    public HashSet<int> weaponIds = [];
 
-    public List<ThingWithComps> weapons = new List<ThingWithComps>();
+    public List<ThingWithComps> weapons = [];
 
     public IEnumerable<ThingWithComps> Weapons => weapons;
 
@@ -46,7 +46,7 @@ public class AssignedWeaponContainer : IExposable
         {
             if (weaponIds == null)
             {
-                weaponIds = new HashSet<int>();
+                weaponIds = [];
             }
 
             weapons.Clear();

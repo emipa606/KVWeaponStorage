@@ -62,7 +62,7 @@ internal class HarmonyPatches
         {
             if (!FoundThings.TryGetValue(things.Weapon.def, out var value))
             {
-                value = new List<StoredWeapons>();
+                value = [];
                 FoundThings.Add(things.Weapon.def, value);
             }
 
@@ -242,8 +242,8 @@ internal class HarmonyPatches
                 List<Gizmo> list = null;
                 if (Settings.ShowWeaponStorageButtonForPawns && WorldComp.HasStorages())
                 {
-                    list = new List<Gizmo>
-                    {
+                    list =
+                    [
                         new Command_Action
                         {
                             icon = AssignUI.weaponStorageTexture,
@@ -251,7 +251,7 @@ internal class HarmonyPatches
                             activateSound = SoundDef.Named("Click"),
                             action = delegate { Find.WindowStack.Add(new AssignUI(null, pawn)); }
                         }
-                    };
+                    ];
                     list.AddRange(__result);
                 }
 
@@ -259,7 +259,7 @@ internal class HarmonyPatches
                 {
                     if (list == null)
                     {
-                        list = new List<Gizmo>();
+                        list = [];
                         list.AddRange(__result);
                     }
 
@@ -296,7 +296,7 @@ internal class HarmonyPatches
                 {
                     if (list == null)
                     {
-                        list = new List<Gizmo>();
+                        list = [];
                         list.AddRange(__result);
                     }
 

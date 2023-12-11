@@ -10,7 +10,7 @@ public static class Util
     {
         if (!Settings.EnableAssignWeapons)
         {
-            return new List<SelectablePawns>(0);
+            return [];
         }
 
         var sortedDictionary = new SortedDictionary<string, List<Pawn>>();
@@ -36,7 +36,7 @@ public static class Util
             var toStringShort = allMapsCaravansAndTravelingTransportPods_Alive_Colonist.Name.ToStringShort;
             if (!sortedDictionary.TryGetValue(toStringShort, out var value))
             {
-                value = sortedDictionary[toStringShort] = new List<Pawn>();
+                value = sortedDictionary[toStringShort] = [];
             }
 
             value.Add(allMapsCaravansAndTravelingTransportPods_Alive_Colonist);

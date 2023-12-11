@@ -226,7 +226,7 @@ public class CombatExtendedUtil : WorldComponent
         {
             Ammo.Clear();
             ac?.Clear();
-            ac = new List<ThingDefCount>();
+            ac = [];
         }
 
         Scribe_Collections.Look(ref ac, "ammo", LookMode.Deep);

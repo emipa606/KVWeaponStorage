@@ -9,9 +9,9 @@ namespace WeaponStorage.UI;
 [StaticConstructorOnStartup]
 public class AmmoUI : Window
 {
-    private readonly List<ThingDefCount> ammo = new List<ThingDefCount>();
+    private readonly List<ThingDefCount> ammo = [];
 
-    private readonly List<ThingDefCount> searchResults = new List<ThingDefCount>();
+    private readonly List<ThingDefCount> searchResults = [];
     private readonly Building_WeaponStorage weaponStorage;
 
     private bool performSearch;

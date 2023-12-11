@@ -100,7 +100,7 @@ public class Building_WeaponStorage : Building_Storage
         try
         {
             Dispose();
-            Destroy(mode);
+            base.Destroy(mode);
         }
         catch (Exception ex)
         {
@@ -113,7 +113,7 @@ public class Building_WeaponStorage : Building_Storage
         try
         {
             Dispose();
-            DeSpawn(mode);
+            base.DeSpawn(mode);
         }
         catch (Exception ex)
         {
@@ -166,13 +166,14 @@ public class Building_WeaponStorage : Building_Storage
         foreach (var item3 in BuildingUtil.FindThingsOfTypeNextTo<Building_RepairWeaponStorage>(Map, Position,
                      Settings.RepairAttachmentDistance))
         {
-            item3.Remove(this);
+            item3?.Remove(this);
         }
     }
 
     public bool TryRemoveWeapon(ThingDef thingDef, SharedWeaponFilter filter, bool includeBioencoded,
         out ThingWithComps weapon)
     {
+        Log.Message($"Trying to remove {thingDef}");
         if (StoredWeapons.TryGetValue(thingDef, out var value))
         {
             for (var linkedListNode = value.First; linkedListNode != null; linkedListNode = linkedListNode.Next)
@@ -209,6 +210,7 @@ public class Building_WeaponStorage : Building_Storage
 
     private bool DropThing(Thing t)
     {
+        Log.Message($"Trying to drop {t}");
         return BuildingUtil.DropThing(t, this, CurrentMap);
     }
 
@@ -338,7 +340,7 @@ public class Building_WeaponStorage : Building_Storage
         _ = weapon.def.label;
         if (!storage.TryGetValue(weapon.def, out var value))
         {
-            value = new LinkedList<ThingWithComps>();
+            value = [];
             value.AddFirst(weapon);
             storage[weapon.def] = value;
             return;
@@ -524,7 +526,7 @@ public class Building_WeaponStorage : Building_Storage
         base.ExposeData();
         if (Scribe.mode == LoadSaveMode.Saving)
         {
-            temp = new List<ThingWithComps>();
+            temp = [];
             foreach (var value in StoredWeapons.Values)
             {
                 temp.AddRange(value);
@@ -537,7 +539,7 @@ public class Building_WeaponStorage : Building_Storage
 
             if (forceAddedWeapons == null)
             {
-                forceAddedWeapons = new List<Thing>(0);
+                forceAddedWeapons = [];
             }
         }
 
@@ -728,7 +730,7 @@ public class Building_WeaponStorage : Building_Storage
     public override IEnumerable<Gizmo> GetGizmos()
     {
         var gizmos = base.GetGizmos();
-        var list = gizmos == null ? new List<Gizmo>(1) : new List<Gizmo>(gizmos);
+        var list = gizmos == null ? new List<Gizmo>(1) : [..gizmos];
         var hashCode = "WeaponStorage".GetHashCode();
         list.Add(new Command_Action
         {

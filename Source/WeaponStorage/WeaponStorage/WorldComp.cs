@@ -19,9 +19,9 @@ public class WorldComp : WorldComponent
 
     static WorldComp()
     {
-        WeaponStoragesToUse = new List<Building_WeaponStorage>();
+        WeaponStoragesToUse = [];
         AssignedWeapons = new Dictionary<Pawn, AssignedWeaponContainer>();
-        SharedWeaponFilter = new List<SharedWeaponFilter>();
+        SharedWeaponFilter = [];
         WeaponsToDrop = new Stack<ThingWithComps>();
         WeaponStorageDef = null;
     }
@@ -71,7 +71,7 @@ public class WorldComp : WorldComponent
         SharedWeaponFilter.Clear();
         if (WeaponStoragesToUse == null)
         {
-            WeaponStoragesToUse = new List<Building_WeaponStorage>();
+            WeaponStoragesToUse = [];
         }
 
         WeaponStoragesToUse.Clear();
@@ -255,7 +255,7 @@ public class WorldComp : WorldComponent
         base.ExposeData();
         if (Scribe.mode == LoadSaveMode.Saving)
         {
-            tmp = new List<AssignedWeaponContainer>(AssignedWeapons.Values);
+            tmp = [..AssignedWeapons.Values];
         }
 
         Scribe_Collections.Look(ref tmp, "assignedWeapons", LookMode.Deep);
@@ -315,7 +315,7 @@ public class WorldComp : WorldComponent
 
         if (SharedWeaponFilter == null)
         {
-            SharedWeaponFilter = new List<SharedWeaponFilter>();
+            SharedWeaponFilter = [];
         }
     }
 

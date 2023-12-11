@@ -7,10 +7,10 @@ namespace WeaponStorage;
 
 public class SharedWeaponFilter : IExposable
 {
-    private readonly HashSet<ThingDef> foundDefCache = new HashSet<ThingDef>();
-    public HashSet<ThingDef> AllowedDefs = new HashSet<ThingDef>();
+    private readonly HashSet<ThingDef> foundDefCache = [];
+    public HashSet<ThingDef> AllowedDefs = [];
 
-    public HashSet<Pawn> AssignedPawns = new HashSet<Pawn>();
+    public HashSet<Pawn> AssignedPawns = [];
 
     public FloatRange HpRange = new FloatRange(0f, 1f);
     public string Label;
@@ -28,7 +28,7 @@ public class SharedWeaponFilter : IExposable
         Scribe_Collections.Look(ref AssignedPawns, false, "assignedPawns", LookMode.Reference);
         if (Scribe.mode == LoadSaveMode.PostLoadInit && AssignedPawns == null)
         {
-            AssignedPawns = new HashSet<Pawn>();
+            AssignedPawns = [];
         }
     }
 
