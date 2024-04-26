@@ -12,7 +12,7 @@ internal static class Patch_WorkGiver_DoBill_TryFindBestBillIngredients
 {
     private static void Postfix(ref bool __result, Bill bill, Pawn pawn, Thing billGiver, List<ThingCount> chosen)
     {
-        if (__result || pawn == null || bill == null || bill.recipe == null || bill.Map != pawn.Map ||
+        if (__result || pawn == null || bill?.recipe == null || bill.Map != pawn.Map ||
             bill.recipe.defName.Contains("Weapon"))
         {
             return;

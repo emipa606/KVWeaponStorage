@@ -78,7 +78,7 @@ internal class SharedWeaponsUI : Window
         }
 
         var num2 = 0f;
-        Widgets.Label(new Rect(num2, num, 100f, 30f), "MedGroupColonist".Translate());
+        Widgets.Label(new Rect(num2, num, 100f, 30f), "MedGroupColonists".Translate());
         num2 += 120f;
         Widgets.DrawTextureFitted(new Rect(num2, num, 30f, 30f), AssignUI.meleeTexture, 1f);
         num2 += 40f;

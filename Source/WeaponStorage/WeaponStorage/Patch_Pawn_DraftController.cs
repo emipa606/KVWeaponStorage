@@ -3,7 +3,7 @@ using RimWorld;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(Pawn_DraftController), "set_Drafted")]
+[HarmonyPatch(typeof(Pawn_DraftController), nameof(Pawn_DraftController.Drafted), MethodType.Setter)]
 internal static class Patch_Pawn_DraftController
 {
     private static void Postfix(Pawn_DraftController __instance)

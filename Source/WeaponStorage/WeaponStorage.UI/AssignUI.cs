@@ -9,31 +9,31 @@ namespace WeaponStorage.UI;
 [StaticConstructorOnStartup]
 public class AssignUI : Window
 {
-    public static Texture2D DropTexture;
+    public static readonly Texture2D DropTexture;
 
     public static Texture2D UnknownWeaponIcon;
 
-    public static Texture2D assignweaponsTexture;
+    public static readonly Texture2D assignweaponsTexture;
 
-    public static Texture2D emptyTexture;
+    public static readonly Texture2D emptyTexture;
 
-    public static Texture2D collectTexture;
+    public static readonly Texture2D collectTexture;
 
-    public static Texture2D yesSellTexture;
+    public static readonly Texture2D yesSellTexture;
 
-    public static Texture2D noSellTexture;
+    public static readonly Texture2D noSellTexture;
 
-    public static Texture2D meleeTexture;
+    public static readonly Texture2D meleeTexture;
 
-    public static Texture2D rangedTexture;
+    public static readonly Texture2D rangedTexture;
 
-    public static Texture2D ammoTexture;
+    public static readonly Texture2D ammoTexture;
 
-    public static Texture2D nextTexture;
+    public static readonly Texture2D nextTexture;
 
-    public static Texture2D previousTexture;
+    public static readonly Texture2D previousTexture;
 
-    public static Texture2D weaponStorageTexture;
+    public static readonly Texture2D weaponStorageTexture;
 
     private readonly List<SelectablePawns> selectablePawns;
 

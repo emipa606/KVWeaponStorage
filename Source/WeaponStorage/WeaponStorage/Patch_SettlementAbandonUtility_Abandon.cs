@@ -3,7 +3,7 @@ using RimWorld.Planet;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(SettlementAbandonUtility), "Abandon")]
+[HarmonyPatch(typeof(SettlementAbandonUtility), nameof(SettlementAbandonUtility.Abandon))]
 internal static class Patch_SettlementAbandonUtility_Abandon
 {
     [HarmonyPriority(800)]

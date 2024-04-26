@@ -18,7 +18,7 @@ public class Settings : ModSettings
 
     public static bool AutoSwitchMelee = true;
 
-    public static int RepairAttachmentDistance = 6;
+    public static readonly int RepairAttachmentDistance = 6;
 
     public static PreferredDamageTypeEnum PreferredDamageType = PreferredDamageTypeEnum.ArmorSharp;
 

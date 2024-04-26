@@ -62,9 +62,8 @@ internal class WeaponStorageUtil
                     ?.GetValue(null) is IDictionary dictionary)
             {
                 var obj = dictionary[p];
-                if (obj != null &&
-                    obj.GetType().GetField("Weapons", BindingFlags.Instance | BindingFlags.Public)?.GetValue(obj) is
-                        List<ThingWithComps> list)
+                if (obj?.GetType().GetField("Weapons", BindingFlags.Instance | BindingFlags.Public)?.GetValue(obj) is
+                    List<ThingWithComps> list)
                 {
                     foreach (var item in list)
                     {
@@ -75,7 +74,7 @@ internal class WeaponStorageUtil
 
                         wsAssembly.GetType("WeaponStorage.HarmonyPatchUtil")
                             .GetMethod("EquipWeapon", BindingFlags.Static | BindingFlags.Public)
-                            ?.Invoke(null, new[] { item, p, obj });
+                            ?.Invoke(null, [item, p, obj]);
                         return true;
                     }
                 }

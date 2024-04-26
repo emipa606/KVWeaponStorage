@@ -4,7 +4,7 @@ using Verse.AI.Group;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(CaravanFormingUtility), "StopFormingCaravan")]
+[HarmonyPatch(typeof(CaravanFormingUtility), nameof(CaravanFormingUtility.StopFormingCaravan))]
 internal static class Patch_CaravanFormingUtility_StopFormingCaravan
 {
     [HarmonyPriority(800)]

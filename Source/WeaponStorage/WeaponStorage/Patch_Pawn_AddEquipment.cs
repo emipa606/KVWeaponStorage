@@ -4,7 +4,7 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(Pawn_EquipmentTracker), "AddEquipment")]
+[HarmonyPatch(typeof(Pawn_EquipmentTracker), nameof(Pawn_EquipmentTracker.AddEquipment))]
 internal static class Patch_Pawn_AddEquipment
 {
     [HarmonyPriority(800)]

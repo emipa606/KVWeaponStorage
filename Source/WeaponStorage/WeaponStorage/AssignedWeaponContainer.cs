@@ -5,6 +5,7 @@ namespace WeaponStorage;
 
 public class AssignedWeaponContainer : IExposable
 {
+    public readonly List<ThingWithComps> weapons = [];
     private ThingWithComps LastToolUsed;
 
     private ThingWithComps LastWeaponUsed;
@@ -14,8 +15,6 @@ public class AssignedWeaponContainer : IExposable
     private List<AssignedWeapon> tmp;
 
     public HashSet<int> weaponIds = [];
-
-    public List<ThingWithComps> weapons = [];
 
     public IEnumerable<ThingWithComps> Weapons => weapons;
 

@@ -3,7 +3,7 @@ using RimWorld;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(MoveColonyUtility), "MoveColonyAndReset")]
+[HarmonyPatch(typeof(MoveColonyUtility), nameof(MoveColonyUtility.MoveColonyAndReset))]
 internal static class Patch_MoveColonyUtility_MoveColonyAndReset
 {
     [HarmonyPriority(800)]

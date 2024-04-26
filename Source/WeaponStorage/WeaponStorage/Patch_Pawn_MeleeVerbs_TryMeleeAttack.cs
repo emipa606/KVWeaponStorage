@@ -5,7 +5,7 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(Pawn_MeleeVerbs), "TryMeleeAttack")]
+[HarmonyPatch(typeof(Pawn_MeleeVerbs), nameof(Pawn_MeleeVerbs.TryMeleeAttack))]
 internal static class Patch_Pawn_MeleeVerbs_TryMeleeAttack
 {
     private static readonly Dictionary<Def, DT> weaponDamageTypes = new Dictionary<Def, DT>();
@@ -120,16 +120,10 @@ internal static class Patch_Pawn_MeleeVerbs_TryMeleeAttack
         Blunt
     }
 
-    private struct DT
+    private struct DT(DamageType dt, float p)
     {
-        public DamageType DamageType;
+        public DamageType DamageType = dt;
 
-        public float Power;
-
-        public DT(DamageType dt, float p)
-        {
-            DamageType = dt;
-            Power = p;
-        }
+        public float Power = p;
     }
 }

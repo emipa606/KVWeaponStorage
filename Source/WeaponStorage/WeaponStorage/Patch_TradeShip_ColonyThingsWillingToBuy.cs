@@ -5,12 +5,12 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(Pawn_TraderTracker), "ColonyThingsWillingToBuy")]
+[HarmonyPatch(typeof(Pawn_TraderTracker), nameof(Pawn_TraderTracker.ColonyThingsWillingToBuy))]
 internal static class Patch_TradeShip_ColonyThingsWillingToBuy
 {
     private static void Postfix(ref IEnumerable<Thing> __result, Pawn playerNegotiator)
     {
-        if (playerNegotiator == null || playerNegotiator.Map == null)
+        if (playerNegotiator?.Map == null)
         {
             return;
         }

@@ -143,15 +143,4 @@ public class AmmoUI : Window
 
         return searchText.Trim().NullOrEmpty() ? ammo : null;
     }
-
-    private enum Tabs
-    {
-        Empty,
-        WeaponStorage_General,
-        WeaponStorage_Neolithic,
-        WeaponStorage_Grenades,
-        WeaponStorage_Rockets,
-        WeaponStorage_Shotguns,
-        WeaponStorage_Advanced
-    }
 }

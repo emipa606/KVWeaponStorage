@@ -210,7 +210,6 @@ public class Building_WeaponStorage : Building_Storage
 
     private bool DropThing(Thing t)
     {
-        Log.Message($"Trying to drop {t}");
         return BuildingUtil.DropThing(t, this, CurrentMap);
     }
 
@@ -271,7 +270,7 @@ public class Building_WeaponStorage : Building_Storage
             return;
         }
 
-        if ((!(newItem is ThingWithComps withComps) || !withComps.def.IsWeapon) &&
+        if ((newItem is not ThingWithComps withComps || !withComps.def.IsWeapon) &&
             !CombatExtendedUtil.IsAmmo(newItem))
         {
             if (!newItem.Spawned)
@@ -682,7 +681,7 @@ public class Building_WeaponStorage : Building_Storage
             DropThing(WorldComp.WeaponsToDrop.Pop());
         }
 
-        if (forceAddedWeapons == null || forceAddedWeapons.Count <= 0)
+        if (forceAddedWeapons is not { Count: > 0 })
         {
             return;
         }
@@ -703,41 +702,11 @@ public class Building_WeaponStorage : Building_Storage
         forceAddedWeapons = null;
     }
 
-    private void CullStorage(List<ThingWithComps> removed, LinkedList<ThingWithComps> l)
-    {
-        var linkedListNode = l.First;
-        while (linkedListNode != null)
-        {
-            var next = linkedListNode.Next;
-            if (!CanAdd(linkedListNode.Value))
-            {
-                removed.Add(linkedListNode.Value);
-                l.Remove(linkedListNode);
-            }
-
-            linkedListNode = next;
-        }
-
-        foreach (var item in removed)
-        {
-            if (!WorldComp.Add(item))
-            {
-                DropThing(item);
-            }
-        }
-    }
-
     public override IEnumerable<Gizmo> GetGizmos()
     {
         var gizmos = base.GetGizmos();
         var list = gizmos == null ? new List<Gizmo>(1) : [..gizmos];
         var hashCode = "WeaponStorage".GetHashCode();
-        list.Add(new Command_Action
-        {
-            icon = ContentFinder<Texture2D>.Get("UI/Commands/RenameZone"),
-            defaultLabel = "CommandRenameZoneLabel".Translate(),
-            action = delegate { Find.WindowStack.Add(new Dialog_Rename(this)); }
-        });
         if (Settings.EnableAssignWeapons)
         {
             list.Add(new Command_Action

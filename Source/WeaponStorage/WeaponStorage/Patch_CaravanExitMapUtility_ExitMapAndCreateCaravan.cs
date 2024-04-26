@@ -6,7 +6,8 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(CaravanExitMapUtility), "ExitMapAndCreateCaravan", typeof(IEnumerable<Pawn>), typeof(Faction),
+[HarmonyPatch(typeof(CaravanExitMapUtility), nameof(CaravanExitMapUtility.ExitMapAndCreateCaravan),
+    typeof(IEnumerable<Pawn>), typeof(Faction),
     typeof(int), typeof(int), typeof(int), typeof(bool))]
 internal static class Patch_CaravanExitMapUtility_ExitMapAndCreateCaravan
 {

@@ -94,7 +94,7 @@ public class WorldComp : WorldComponent
 
     public static void Add(Building_WeaponStorage ws)
     {
-        if (ws == null || ws.Map == null)
+        if (ws?.Map == null)
         {
             Log.Error("Cannot add WeaponStorage that is either null or has a null map.");
         }

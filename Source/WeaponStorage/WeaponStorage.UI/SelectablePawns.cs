@@ -3,11 +3,11 @@ using Verse;
 
 namespace WeaponStorage.UI;
 
-public struct SelectablePawns
+public struct SelectablePawns(Pawn pawn)
 {
-    public readonly Pawn Pawn;
+    public readonly Pawn Pawn = pawn;
 
-    private string labelAndStats;
+    private string labelAndStats = null;
 
     public string LabelAndStats
     {
@@ -29,12 +29,6 @@ public struct SelectablePawns
     public string Ranged => !Pawn.WorkTagIsDisabled(WorkTags.Violent)
         ? Pawn.skills.GetSkill(SkillDefOf.Shooting).levelInt.ToString()
         : "-";
-
-    public SelectablePawns(Pawn pawn)
-    {
-        Pawn = pawn;
-        labelAndStats = null;
-    }
 
     public static string GetLabelAndStatsFor(Pawn pawn)
     {

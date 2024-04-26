@@ -5,7 +5,7 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(FloatMenuMakerMap), "AddHumanlikeOrders")]
+[HarmonyPatch(typeof(FloatMenuMakerMap), nameof(FloatMenuMakerMap.AddHumanlikeOrders))]
 internal static class Patch_FloatMenuMakerMap_AddHumanlikeOrders
 {
     private static void Postfix(Pawn pawn, List<FloatMenuOption> opts)

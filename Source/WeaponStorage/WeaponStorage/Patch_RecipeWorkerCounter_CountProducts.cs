@@ -5,7 +5,7 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(RecipeWorkerCounter), "CountProducts")]
+[HarmonyPatch(typeof(RecipeWorkerCounter), nameof(RecipeWorkerCounter.CountProducts))]
 internal static class Patch_RecipeWorkerCounter_CountProducts
 {
     private static void Postfix(ref int __result, RecipeWorkerCounter __instance, Bill_Production bill)

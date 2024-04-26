@@ -3,7 +3,7 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(Pawn_EquipmentTracker), "MakeRoomFor")]
+[HarmonyPatch(typeof(Pawn_EquipmentTracker), nameof(Pawn_EquipmentTracker.MakeRoomFor))]
 internal static class Patch_Pawn_EquipmentTracker_MakeRoomFor
 {
     [HarmonyPriority(800)]

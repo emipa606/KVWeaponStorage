@@ -4,7 +4,7 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(ScribeSaver), "InitSaving")]
+[HarmonyPatch(typeof(ScribeSaver), nameof(ScribeSaver.InitSaving))]
 internal static class Patch_ScribeSaver_InitSaving
 {
     private static void Prefix()

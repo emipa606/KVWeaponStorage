@@ -3,7 +3,7 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(Pawn), "Kill")]
+[HarmonyPatch(typeof(Pawn), nameof(Pawn.Kill))]
 internal static class Patch_Pawn_Kill
 {
     [HarmonyPriority(800)]

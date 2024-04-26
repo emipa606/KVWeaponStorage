@@ -1,5 +1,8 @@
 # Changelog for KVWeaponStorage
 
+1.5.0 - Updated for 1.5
+
+
 1.4.2 - Fixed an infinite loop, strange that noone has ever deconstructed a storage
 
 
