@@ -69,15 +69,12 @@ public class WorldComp : WorldComponent
 
         AssignedWeapons.Clear();
         SharedWeaponFilter.Clear();
-        if (WeaponStoragesToUse == null)
-        {
-            WeaponStoragesToUse = [];
-        }
+        WeaponStoragesToUse ??= [];
 
         WeaponStoragesToUse.Clear();
     }
 
-    public static ThingDef WeaponStorageDef { get; private set; }
+    private static ThingDef WeaponStorageDef { get; set; }
 
     public static IEnumerable<AssignedWeaponContainer> AssignedWeaponContainers
     {
@@ -313,10 +310,7 @@ public class WorldComp : WorldComponent
             tmp = null;
         }
 
-        if (SharedWeaponFilter == null)
-        {
-            SharedWeaponFilter = [];
-        }
+        SharedWeaponFilter ??= [];
     }
 
     public static void SortWeaponStoragesToUse()

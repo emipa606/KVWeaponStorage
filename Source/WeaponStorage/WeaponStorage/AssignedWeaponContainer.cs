@@ -43,10 +43,7 @@ public class AssignedWeaponContainer : IExposable
         Scribe_References.Look(ref LastToolUsed, "lastToolUsed");
         if (Scribe.mode == LoadSaveMode.PostLoadInit)
         {
-            if (weaponIds == null)
-            {
-                weaponIds = [];
-            }
+            weaponIds ??= [];
 
             weapons.Clear();
             weaponIds.Clear();

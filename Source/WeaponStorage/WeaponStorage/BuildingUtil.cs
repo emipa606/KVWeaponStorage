@@ -219,7 +219,7 @@ internal class BuildingUtil
         {
             if (!toDrop.Spawned)
             {
-                GenThing.TryDropAndSetForbidden(toDrop, from, map, ThingPlaceMode.Near, out var _, makeForbidden);
+                GenThing.TryDropAndSetForbidden(toDrop, from, map, ThingPlaceMode.Near, out _, makeForbidden);
                 if (!toDrop.Spawned && !GenPlace.TryPlaceThing(toDrop, from, map, ThingPlaceMode.Near))
                 {
                     Log.Error($"Failed to spawn {toDrop.Label} x{toDrop.stackCount}");

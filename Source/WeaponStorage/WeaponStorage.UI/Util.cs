@@ -15,7 +15,7 @@ public static class Util
 
         var sortedDictionary = new SortedDictionary<string, List<Pawn>>();
         foreach (var allMapsCaravansAndTravelingTransportPods_Alive_Colonist in PawnsFinder
-                     .AllMapsCaravansAndTravelingTransportPods_Alive_Colonists)
+                     .AllMapsCaravansAndTravellingTransporters_Alive_Colonists)
         {
             if (allMapsCaravansAndTravelingTransportPods_Alive_Colonist == null ||
                 allMapsCaravansAndTravelingTransportPods_Alive_Colonist.Faction != Faction.OfPlayer ||

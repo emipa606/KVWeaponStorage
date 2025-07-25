@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: repair attachment -->
+  <RepairWeaponStorage.label>repair attachment</RepairWeaponStorage.label>
+  <!-- EN: An attachment to weapon storages which can repair the stored weapons. -->
+  <RepairWeaponStorage.description>An attachment to weapon storages which can repair the stored weapons.</RepairWeaponStorage.description>
+  <!-- EN: weapon storage -->
+  <WeaponStorage.label>weapon storage</WeaponStorage.label>
+  <!-- EN: Store weapons for use later. -->
+  <WeaponStorage.description>Store weapons for use later.</WeaponStorage.description>
+</LanguageData>

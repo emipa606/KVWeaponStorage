@@ -1,0 +1,44 @@
+ManifestFileVersion: 0
+CRC: 3933051580
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 32cccb81176f9146569d57c4c5710605
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2612ac43db082a73502ee80f2eceb73f
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 32cccb81176f9146569d57c4c5710605
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/collect.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/RepairWeaponStorage_north.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/RepairWeaponStorage_south.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/assignweapons.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/UnknownWeapon.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/WeaponStorage_eastm.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/next.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/WeaponStorage_south.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/RepairWeaponStorage_northm.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/ammo.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/RepairWeaponStorage_eastm.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/nosell.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/RepairWeaponStorage_east.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/WeaponStorage_southm.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/WeaponStorage_north.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/RepairWeaponStorage_southm.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/empty.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/WeaponStorage_northm.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/Furniture/WeaponStorage_east.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/yessell.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/ranged.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/drop.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/previous.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/weaponstorage.png
+- Assets/Data/Mlie.KVWeaponStorage/Textures/UI/melee.png
+Dependencies: []

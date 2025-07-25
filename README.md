@@ -1,11 +1,10 @@
-# KVWeaponStorage
+# [[KV] Weapon Storage (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=2989305606)
 
 ![Image](https://i.imgur.com/buuPQel.png)
 
 Update of Kiame Vivacitys mod https://steamcommunity.com/sharedfiles/filedetails/?id=1180720427
 
 ![Image](https://i.imgur.com/pufA0kM.png)
-
 	
 ![Image](https://i.imgur.com/Z4GOv8H.png)
 
@@ -24,7 +23,7 @@ Repair Attachment
 -Energy: 10 W (not in use) or 1000 W (in use)
 -Place within 6 squares of a Weapon Storage to have weapons automatically repaired
 -Research Required: Mending &amp; Multi-Analyzer
--http://steamcommunity.com/sharedfiles/filedetails/?id=735241897]Mending Mod not required (highly recommended though)
+-[Mending](http://steamcommunity.com/sharedfiles/filedetails/?id=735241897) Mod not required (highly recommended though)
 
 Compatible with:
 Save Storage &amp; Outfit Settings - https://steamcommunity.com/sharedfiles/filedetails/?id=1180718516
@@ -66,14 +65,14 @@ Some cases/behaviors to consider - these are not hard coded but just how the mod
 - If a pawn picks up a weapon, they are now assigned with that weapon.
 - If a drafted pawn is carrying something in their primary equipment slot that is not a weapon, instead of placing the item in their pocket of holding they will place it on the ground.
 
-**[u]Forming Caravans[/u]**
+**<ins>Forming Caravans</ins>**
 Stored weapons will be available for caravans. Until the pawns in the caravan either exit the map or are told to cancel the caravan, the weapons will remain scattered around the storages. If something goes wrong and the items are not collected, let me know and click the "Collect" button on the weapon storages.
 
 As of now if the Cancel button is used from the Form Caravan window, the weapons will not be collected. This will likely remain the case for the time being due to limitations in modding tools.
 
 This can be fixed by either using the Collect button or forming another caravan and either allow it to leave the map or cancel the caravan
 
-**[u]Repair Attachment[/u]**
+**<ins>Repair Attachment</ins>**
 Will detect if weapons within attached Weapon Storages need to be repaired.
 Each Repair Attachment can only repair one weapon at a time.
 More than one Repair Attachment can be attached to one or more Weapon Storages (many-to-many relationship)
@@ -84,13 +83,12 @@ More than one Repair Attachment can be attached to one or more Weapon Storages (
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib or the standalone https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404]Uploader and command Ctrl+F12
+-  Post your error-log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
--  Use https://github.com/RimSort/RimSort/releases/latest]RimSort to sort your mods
+-  Use [RimSort](https://github.com/RimSort/RimSort/releases/latest) to sort your mods
 
+ 
 
-
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2989305606]![Image](https://img.shields.io/github/v/release/emipa606/KVWeaponStorage?label=latest%20version&style=plastic&color=9f1111&labelColor=black)
-
+[![Image](https://img.shields.io/github/v/release/emipa606/KVWeaponStorage?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2989305606) | tags:  assign,  pawns

@@ -15,13 +15,11 @@ public class Building_WeaponStorage : Building_Storage
     private readonly FieldInfo AllowedDefsFI =
         typeof(ThingFilter).GetField("allowedDefs", BindingFlags.Instance | BindingFlags.NonPublic);
 
-    private readonly ThingFilter previousStorageFilters = new ThingFilter();
+    private readonly ThingFilter previousStorageFilters = new();
 
-    public readonly Dictionary<ThingDef, LinkedList<ThingWithComps>> StoredBioEncodedWeapons =
-        new Dictionary<ThingDef, LinkedList<ThingWithComps>>();
+    public readonly Dictionary<ThingDef, LinkedList<ThingWithComps>> StoredBioEncodedWeapons = new();
 
-    public readonly Dictionary<ThingDef, LinkedList<ThingWithComps>> StoredWeapons =
-        new Dictionary<ThingDef, LinkedList<ThingWithComps>>();
+    public readonly Dictionary<ThingDef, LinkedList<ThingWithComps>> StoredWeapons = new();
 
     public bool AllowAdds;
 
@@ -487,10 +485,7 @@ public class Building_WeaponStorage : Building_Storage
             }
 
             item.DeSpawn();
-            if (forceAddedWeapons == null)
-            {
-                forceAddedWeapons = new List<Thing>(list.Count);
-            }
+            forceAddedWeapons ??= new List<Thing>(list.Count);
 
             forceAddedWeapons.Add(item);
         }
@@ -498,7 +493,7 @@ public class Building_WeaponStorage : Building_Storage
         list.Clear();
     }
 
-    public void HandleThingsOnTop()
+    private void HandleThingsOnTop()
     {
         if (!Spawned)
         {
@@ -536,10 +531,7 @@ public class Building_WeaponStorage : Building_Storage
                 temp.AddRange(value2);
             }
 
-            if (forceAddedWeapons == null)
-            {
-                forceAddedWeapons = [];
-            }
+            forceAddedWeapons ??= [];
         }
 
         Scribe_Collections.Look(ref temp, false, "storedWeapons", LookMode.Deep);

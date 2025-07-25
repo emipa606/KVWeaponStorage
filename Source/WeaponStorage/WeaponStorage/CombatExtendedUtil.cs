@@ -40,10 +40,7 @@ public class CombatExtendedUtil : WorldComponent
         : base(world)
     {
         Ammo?.Clear();
-        if (Ammo == null)
-        {
-            Ammo = new Dictionary<ThingDef, int>();
-        }
+        Ammo ??= new Dictionary<ThingDef, int>();
     }
 
     public static bool HasCombatExtended { get; private set; }

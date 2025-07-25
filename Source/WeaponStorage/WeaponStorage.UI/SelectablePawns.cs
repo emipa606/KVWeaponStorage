@@ -13,10 +13,7 @@ public struct SelectablePawns(Pawn pawn)
     {
         get
         {
-            if (labelAndStats == null)
-            {
-                labelAndStats = GetLabelAndStatsFor(Pawn);
-            }
+            labelAndStats ??= GetLabelAndStatsFor(Pawn);
 
             return labelAndStats;
         }

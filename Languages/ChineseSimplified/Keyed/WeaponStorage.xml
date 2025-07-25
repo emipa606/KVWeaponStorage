@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <WeaponStorage>武器存储箱</WeaponStorage>
   <WeaponStorage.ShowWeaponsWhenNotDrafted>未征召时显示武器切换UI</WeaponStorage.ShowWeaponsWhenNotDrafted>
@@ -46,4 +46,7 @@
   <WeaponStorage.ManageAmmo>管理弹药</WeaponStorage.ManageAmmo>
   <WeaponStorage.ManageAmmoDesc>管理战斗扩展弹药</WeaponStorage.ManageAmmoDesc>
   <WeaponStorage.UseWSCEPatch>你有mod [Combat Extended] 和 [Weapon Storage]。请同时使用[武器存储战斗扩展补丁]。</WeaponStorage.UseWSCEPatch>
+  <!-- Shared Weapons Window -->
+  <!-- Misc -->
+  <!-- Combat Extended -->
 </LanguageData>
