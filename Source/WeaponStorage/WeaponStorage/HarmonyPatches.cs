@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using Verse;
@@ -6,7 +7,7 @@ using Verse;
 namespace WeaponStorage;
 
 [StaticConstructorOnStartup]
-internal class HarmonyPatches
+internal static class HarmonyPatches
 {
     static HarmonyPatches()
     {
@@ -32,7 +33,7 @@ internal class HarmonyPatches
         public readonly int Count = count;
         public readonly ThingFilter Filter = filter;
 
-        public readonly Dictionary<Def, List<StoredWeapons>> FoundThings = new();
+        private readonly Dictionary<Def, List<StoredWeapons>> FoundThings = new();
 
         public void Add(StoredWeapons things)
         {
@@ -52,15 +53,7 @@ internal class HarmonyPatches
 
         public bool CountReached()
         {
-            foreach (var value in FoundThings.Values)
-            {
-                if (CountReached(value))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return FoundThings.Values.Any(CountReached);
         }
 
         private bool CountReached(List<StoredWeapons> l)
@@ -76,15 +69,7 @@ internal class HarmonyPatches
 
         public List<StoredWeapons> GetFoundThings()
         {
-            foreach (var value in FoundThings.Values)
-            {
-                if (CountReached(value))
-                {
-                    return value;
-                }
-            }
-
-            return null;
+            return FoundThings.Values.FirstOrDefault(CountReached);
         }
     }
 }

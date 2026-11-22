@@ -7,7 +7,7 @@ namespace WeaponStorage;
 internal static class Pawn_EquipmentTracker_TryDropEquipment
 {
     [HarmonyPriority(800)]
-    private static void Prefix(ref Pawn __state, ThingWithComps eq)
+    public static void Prefix(ref Pawn __state, ThingWithComps eq)
     {
         if (!eq.def.IsWeapon || eq.holdingOwner?.Owner is not Pawn_EquipmentTracker pawn_EquipmentTracker)
         {
@@ -22,7 +22,7 @@ internal static class Pawn_EquipmentTracker_TryDropEquipment
     }
 
     [HarmonyPriority(800)]
-    private static void Postfix(ref Pawn __state, ThingWithComps eq)
+    public static void Postfix(ref Pawn __state, ThingWithComps eq)
     {
         if (__state == null)
         {

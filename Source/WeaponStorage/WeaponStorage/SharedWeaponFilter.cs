@@ -12,12 +12,12 @@ public class SharedWeaponFilter : IExposable
 
     public HashSet<Pawn> AssignedPawns = [];
 
-    public FloatRange HpRange = new FloatRange(0f, 1f);
+    public FloatRange HpRange = new(0f, 1f);
     public string Label;
 
-    private long lastCacheUpdate;
-
     public QualityRange QualityRange = QualityRange.All;
+
+    private long lastCacheUpdate;
 
     public void ExposeData()
     {
@@ -34,12 +34,7 @@ public class SharedWeaponFilter : IExposable
 
     public bool Allows(ThingWithComps t)
     {
-        if (!t.TryGetQuality(out var qc))
-        {
-            return t.HitPoints >= HpRange.min * t.def.BaseMaxHitPoints;
-        }
-
-        if ((int)qc >= (int)QualityRange.min && (int)qc <= (int)QualityRange.max)
+        if (!t.TryGetQuality(out var qc) || (int)qc >= (int)QualityRange.min && (int)qc <= (int)QualityRange.max)
         {
             return t.HitPoints >= HpRange.min * t.def.BaseMaxHitPoints;
         }

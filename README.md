@@ -1,12 +1,12 @@
 # [[KV] Weapon Storage (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=2989305606)
 
-![Image](https://i.imgur.com/buuPQel.png)
+![Image](https://img.litet.net/logos/Info.png)
 
 Update of Kiame Vivacitys mod https://steamcommunity.com/sharedfiles/filedetails/?id=1180720427
 
-![Image](https://i.imgur.com/pufA0kM.png)
+![Image](https://img.litet.net/logos/Notice.png)
 	
-![Image](https://i.imgur.com/Z4GOv8H.png)
+![Image](https://img.litet.net/logos/OriginalDescription.png)
 
 Stores weapons and allows weapons to be assigned to pawns for use in the field.
 
@@ -77,13 +77,13 @@ Will detect if weapons within attached Weapon Storages need to be repaired.
 Each Repair Attachment can only repair one weapon at a time.
 More than one Repair Attachment can be attached to one or more Weapon Storages (many-to-many relationship)
 
-![Image](https://i.imgur.com/PwoNOj4.png)
+![Image](https://img.litet.net/logos/ReportingIssues.png)
 
 
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
+-  Always post your log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
@@ -91,4 +91,4 @@ More than one Repair Attachment can be attached to one or more Weapon Storages (
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/KVWeaponStorage?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2989305606) | tags:  assign,  pawns
+[![Image](https://img.shields.io/github/v/release/emipa606/KVWeaponStorage?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2989305606) | assign, pawns

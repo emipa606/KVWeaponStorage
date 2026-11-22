@@ -8,10 +8,10 @@ internal class SharedWeaponFilterUI : Window
 {
     private readonly SharedWeaponFilter filter;
 
-    private readonly SortedDictionary<string, ThingDef> meleeWeapons = new SortedDictionary<string, ThingDef>();
+    private readonly SortedDictionary<string, ThingDef> meleeWeapons = new();
 
-    private readonly SortedDictionary<string, ThingDef> rangedWeapons = new SortedDictionary<string, ThingDef>();
-    private Vector2 scrollPosition = new Vector2(0f, 0f);
+    private readonly SortedDictionary<string, ThingDef> rangedWeapons = new();
+    private Vector2 scrollPosition = new(0f, 0f);
 
     private float y;
 
@@ -36,7 +36,7 @@ internal class SharedWeaponFilterUI : Window
         }
     }
 
-    public override Vector2 InitialSize => new Vector2(300f, 600f);
+    public override Vector2 InitialSize => new(300f, 600f);
 
     public override void DoWindowContents(Rect inRect)
     {
@@ -85,7 +85,8 @@ internal class SharedWeaponFilterUI : Window
         y += 32f;
     }
 
-    private void DrawHitPointsFilterConfig(float x, ref float internalY, float width, SharedWeaponFilter internalFilter)
+    private static void DrawHitPointsFilterConfig(float x, ref float internalY, float width,
+        SharedWeaponFilter internalFilter)
     {
         var rect = new Rect(x + 20f, internalY, width - 40f, 28f);
         var hpRange = internalFilter.HpRange;
@@ -96,7 +97,8 @@ internal class SharedWeaponFilterUI : Window
         Text.Font = GameFont.Small;
     }
 
-    private void DrawQualityFilterConfig(float x, ref float internalY, float width, SharedWeaponFilter internalFilter)
+    private static void DrawQualityFilterConfig(float x, ref float internalY, float width,
+        SharedWeaponFilter internalFilter)
     {
         var rect = new Rect(x + 20f, internalY, width - 40f, 28f);
         var range = internalFilter.QualityRange;

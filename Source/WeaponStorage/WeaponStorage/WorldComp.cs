@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using RimWorld.Planet;
 using Verse;
 using WeaponStorage.UI;
@@ -7,7 +8,7 @@ namespace WeaponStorage;
 
 public class WorldComp : WorldComponent
 {
-    public static List<Building_WeaponStorage> WeaponStoragesToUse;
+    private static List<Building_WeaponStorage> WeaponStoragesToUse;
 
     private static readonly Dictionary<Pawn, AssignedWeaponContainer> AssignedWeapons;
 
@@ -103,38 +104,12 @@ public class WorldComp : WorldComponent
 
     public static bool Add(ThingWithComps t)
     {
-        if (t == null)
-        {
-            return false;
-        }
-
-        foreach (var item in WeaponStoragesToUse)
-        {
-            if (item.AddWeapon(t))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return t != null && WeaponStoragesToUse.Any(item => item.AddWeapon(t));
     }
 
     public static bool CanAdd(ThingWithComps t)
     {
-        if (t == null)
-        {
-            return false;
-        }
-
-        foreach (var item in WeaponStoragesToUse)
-        {
-            if (item.CanAdd(t))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return t != null && WeaponStoragesToUse.Any(item => item.CanAdd(t));
     }
 
     public static bool TryRemoveWeapon(ThingDef def, SharedWeaponFilter filter, bool includeBioencoded,
@@ -252,7 +227,7 @@ public class WorldComp : WorldComponent
         base.ExposeData();
         if (Scribe.mode == LoadSaveMode.Saving)
         {
-            tmp = [..AssignedWeapons.Values];
+            tmp = [.. AssignedWeapons.Values];
         }
 
         Scribe_Collections.Look(ref tmp, "assignedWeapons", LookMode.Deep);
@@ -368,18 +343,18 @@ public class WorldComp : WorldComponent
             return;
         }
 
-        foreach (var pawn in Util.GetPawns(true))
+        foreach (var pawn in Util.GetPawns(true).Select(p => p.Pawn))
         {
             var assignedWeaponContainer = new AssignedWeaponContainer
             {
-                Pawn = pawn.Pawn
+                Pawn = pawn
             };
-            if (pawn.Pawn.equipment.Primary != null)
+            if (pawn.equipment.Primary != null)
             {
-                assignedWeaponContainer.Add(pawn.Pawn.equipment.Primary);
+                assignedWeaponContainer.Add(pawn.equipment.Primary);
             }
 
-            AssignedWeapons.Add(pawn.Pawn, assignedWeaponContainer);
+            AssignedWeapons.Add(pawn, assignedWeaponContainer);
         }
     }
 

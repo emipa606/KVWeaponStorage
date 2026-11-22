@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace WeaponStorage;
 
 public class AssignedWeaponContainer : IExposable
 {
-    public readonly List<ThingWithComps> weapons = [];
+    private readonly List<ThingWithComps> weapons = [];
     private ThingWithComps LastToolUsed;
 
     private ThingWithComps LastWeaponUsed;
@@ -14,7 +15,7 @@ public class AssignedWeaponContainer : IExposable
 
     private List<AssignedWeapon> tmp;
 
-    public HashSet<int> weaponIds = [];
+    private HashSet<int> weaponIds = [];
 
     public IEnumerable<ThingWithComps> Weapons => weapons;
 
@@ -47,16 +48,16 @@ public class AssignedWeaponContainer : IExposable
 
             weapons.Clear();
             weaponIds.Clear();
-            foreach (var item2 in tmp)
+            foreach (var weapon in tmp.Select(x => x.Weapon))
             {
-                if (item2.Weapon == null)
+                if (weapon == null)
                 {
                     Log.Error($"failed to load weapon assigned to {Pawn.Name.ToStringShort}");
                     continue;
                 }
 
-                weapons.Add(item2.Weapon);
-                weaponIds.Add(item2.Weapon.thingIDNumber);
+                weapons.Add(weapon);
+                weaponIds.Add(weapon.thingIDNumber);
             }
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit && Pawn != null)
@@ -162,7 +163,7 @@ public class AssignedWeaponContainer : IExposable
         return weapons.Remove(weapon);
     }
 
-    private class AssignedWeapon : IExposable
+    private sealed class AssignedWeapon : IExposable
     {
         public bool IsEquipped;
 

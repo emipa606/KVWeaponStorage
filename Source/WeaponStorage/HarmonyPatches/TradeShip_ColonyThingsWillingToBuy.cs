@@ -8,7 +8,7 @@ namespace WeaponStorage;
 [HarmonyPatch(typeof(TradeShip), nameof(TradeShip.ColonyThingsWillingToBuy))]
 internal static class TradeShip_ColonyThingsWillingToBuy
 {
-    private static void Postfix(ref IEnumerable<Thing> __result, Pawn playerNegotiator)
+    public static void Postfix(ref IEnumerable<Thing> __result, Pawn playerNegotiator)
     {
         if (playerNegotiator?.Map == null)
         {

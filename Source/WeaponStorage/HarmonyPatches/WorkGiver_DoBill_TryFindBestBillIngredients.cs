@@ -6,10 +6,10 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(WorkGiver_DoBill), nameof(WorkGiver_DoBill.TryFindBestBillIngredients))]
+[HarmonyPatch(typeof(WorkGiver_DoBill), "TryFindBestBillIngredients")]
 public static class WorkGiver_DoBill_TryFindBestBillIngredients
 {
-    private static void Postfix(ref bool __result, Bill bill, Pawn pawn, Thing billGiver, List<ThingCount> chosen)
+    public static void Postfix(ref bool __result, Bill bill, Pawn pawn, Thing billGiver, List<ThingCount> chosen)
     {
         if (bill.Map == null)
         {

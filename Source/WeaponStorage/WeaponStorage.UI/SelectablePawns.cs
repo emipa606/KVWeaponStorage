@@ -38,16 +38,16 @@ public struct SelectablePawns(Pawn pawn)
         return $"{pawn.Name.ToStringShort} -- {SkillDefOf.Melee.label}: {text} -- {SkillDefOf.Shooting.label}: {text2}";
     }
 
-    public override bool Equals(object o)
+    public override bool Equals(object obj)
     {
-        if (o is SelectablePawns selectablePawns)
+        if (obj is SelectablePawns selectablePawns)
         {
             return Pawn?.thingIDNumber == selectablePawns.Pawn?.thingIDNumber;
         }
 
-        if (o is Pawn pawn)
+        if (obj is Pawn pawnObject)
         {
-            return Pawn?.thingIDNumber == pawn.thingIDNumber;
+            return Pawn?.thingIDNumber == pawnObject.thingIDNumber;
         }
 
         return false;

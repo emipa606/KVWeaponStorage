@@ -7,7 +7,7 @@ namespace WeaponStorage;
 [HarmonyPatch(typeof(ScribeSaver), nameof(ScribeSaver.InitSaving))]
 internal static class ScribeSaver_InitSaving
 {
-    private static void Prefix()
+    public static void Prefix()
     {
         try
         {

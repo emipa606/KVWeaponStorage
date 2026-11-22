@@ -7,9 +7,9 @@ namespace WeaponStorage;
 [HarmonyPatch(typeof(Dialog_FormCaravan), nameof(Dialog_FormCaravan.PostOpen))]
 internal static class Dialog_FormCaravan_PostOpen
 {
-    private static void Prefix(Window __instance, Map ___map)
+    public static void Prefix(Window __instance, Map ___map)
     {
-        if (!(__instance.GetType() == typeof(Dialog_FormCaravan)))
+        if (__instance.GetType() != typeof(Dialog_FormCaravan))
         {
             return;
         }

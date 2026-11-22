@@ -8,7 +8,7 @@ namespace WeaponStorage;
 internal static class CaravanFormingUtility_StopFormingCaravan
 {
     [HarmonyPriority(800)]
-    private static void Postfix(Lord lord)
+    public static void Postfix(Lord lord)
     {
         foreach (var weaponStorage in WorldComp.GetWeaponStorages(lord.Map))
         {

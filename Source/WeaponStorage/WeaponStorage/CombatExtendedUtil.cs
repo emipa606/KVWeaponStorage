@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using RimWorld.Planet;
 using Verse;
@@ -8,7 +9,7 @@ namespace WeaponStorage;
 
 public class CombatExtendedUtil : WorldComponent
 {
-    public static Dictionary<ThingDef, int> Ammo;
+    private static Dictionary<ThingDef, int> Ammo;
 
     private List<ThingDefCount> ac;
 
@@ -17,14 +18,14 @@ public class CombatExtendedUtil : WorldComponent
         Ammo = new Dictionary<ThingDef, int>();
         HasCombatExtended = false;
         var hasCombatExtendedPatch = false;
-        foreach (var item in ModsConfig.ActiveModsInLoadOrder)
+        foreach (var name in ModsConfig.ActiveModsInLoadOrder.Select(m => m.Name))
         {
-            if (item.Name.Equals("Combat Extended"))
+            if (name.Equals("Combat Extended"))
             {
                 HasCombatExtended = true;
             }
 
-            if (item.Name.StartsWith("[KV] Weapon Storage Combat Extended Patch"))
+            if (name.StartsWith("[KV] Weapon Storage Combat Extended Patch"))
             {
                 hasCombatExtendedPatch = true;
             }
@@ -85,7 +86,7 @@ public class CombatExtendedUtil : WorldComponent
         return TryDropAmmo(def, count, position, map, out _);
     }
 
-    public static bool TryDropAmmo(ThingDef def, int count, IntVec3 position, Map map, out Thing droppedAmmo)
+    private static bool TryDropAmmo(ThingDef def, int count, IntVec3 position, Map map, out Thing droppedAmmo)
     {
         if (count > 0 && def != null && Ammo.TryGetValue(def, out var value) && value > 0)
         {

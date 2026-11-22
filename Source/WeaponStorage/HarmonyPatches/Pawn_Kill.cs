@@ -1,3 +1,4 @@
+using System.Linq;
 using HarmonyLib;
 using Verse;
 
@@ -7,13 +8,13 @@ namespace WeaponStorage;
 internal static class Pawn_Kill
 {
     [HarmonyPriority(800)]
-    private static void Prefix(Pawn __instance, ref State __state)
+    public static void Prefix(Pawn __instance, ref State __state)
     {
         __state = new State(__instance);
     }
 
     [HarmonyPriority(800)]
-    private static void Postfix(Pawn __instance, ref State __state)
+    public static void Postfix(Pawn __instance, ref State __state)
     {
         if (!__instance.Dead || !__instance.IsColonist)
         {
@@ -37,16 +38,13 @@ internal static class Pawn_Kill
         }
 
         WorldComp.RemoveAssignedWeapons(__instance);
-        foreach (var weapon in aw.Weapons)
+        foreach (var weapon in aw.Weapons.Where(weapon => !WorldComp.Add(weapon)))
         {
-            if (!WorldComp.Add(weapon))
-            {
-                BuildingUtil.DropSingleThing(weapon, __instance.Position, __state.Map);
-            }
+            BuildingUtil.DropSingleThing(weapon, __instance.Position, __state.Map);
         }
     }
 
-    private struct State
+    public struct State
     {
         internal readonly Map Map;
 

@@ -5,7 +5,7 @@ using Verse;
 
 namespace WeaponStorage;
 
-internal class BuildingUtil
+internal static class BuildingUtil
 {
     public static List<T> FindThingsOfTypeNextTo<T>(Map map, IntVec3 position, int distance) where T : Thing
     {
@@ -79,7 +79,7 @@ internal class BuildingUtil
         return false;
     }
 
-    public static bool DropThing(Thing toDrop, int amountToDrop, Building_WeaponStorage from, Map map,
+    private static bool DropThing(Thing toDrop, int amountToDrop, Building_WeaponStorage from, Map map,
         List<Thing> droppedThings = null, bool makeForbidden = false)
     {
         if (toDrop.stackCount == 0)
@@ -135,7 +135,7 @@ internal class BuildingUtil
         }
     }
 
-    public static bool DropThing(Thing toDrop, int amountToDrop, IntVec3 from, Map map,
+    private static bool DropThing(Thing toDrop, int amountToDrop, IntVec3 from, Map map,
         List<Thing> droppedThings = null, bool makeForbidden = false)
     {
         if (toDrop.stackCount == 0)
@@ -183,7 +183,7 @@ internal class BuildingUtil
         return result;
     }
 
-    public static bool DropSingleThing(Thing toDrop, Building_WeaponStorage from, Map map, bool makeForbidden = false)
+    private static bool DropSingleThing(Thing toDrop, Building_WeaponStorage from, Map map, bool makeForbidden = false)
     {
         if (toDrop.stackCount == 0)
         {

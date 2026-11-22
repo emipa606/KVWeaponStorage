@@ -12,16 +12,17 @@ public static class HarmonyPatchUtil
             return;
         }
 
-        pawn.equipment.Remove(thingWithComps);
+        pawn?.equipment?.Remove(thingWithComps);
         if (c != null && c.Contains(thingWithComps))
         {
             c.Add(thingWithComps);
         }
         else if (!WorldComp.Add(thingWithComps) &&
+                 pawn != null &&
                  !BuildingUtil.DropSingleThing(thingWithComps, pawn.Position, pawn.Map))
         {
             Log.Warning(
-                $"Failed to drop {pawn.Name.ToStringShort}'s primary weapon [{pawn.equipment.Primary.Label}].");
+                $"Failed to drop {pawn.Name.ToStringShort}'s primary weapon [{pawn.equipment?.Primary.Label}].");
         }
     }
 

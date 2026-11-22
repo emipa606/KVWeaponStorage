@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -15,23 +16,23 @@ public class Building_WeaponStorage : Building_Storage
     private readonly FieldInfo AllowedDefsFI =
         typeof(ThingFilter).GetField("allowedDefs", BindingFlags.Instance | BindingFlags.NonPublic);
 
-    private readonly ThingFilter previousStorageFilters = new();
-
     public readonly Dictionary<ThingDef, LinkedList<ThingWithComps>> StoredBioEncodedWeapons = new();
 
     public readonly Dictionary<ThingDef, LinkedList<ThingWithComps>> StoredWeapons = new();
 
+    private readonly ThingFilter previousStorageFilters = new();
+
     public bool AllowAdds;
+
+    private bool IncludeInSharedWeapons = true;
+
+    private string Name = "";
 
     private List<Thing> forceAddedWeapons;
 
-    public bool IncludeInSharedWeapons = true;
-
     private bool includeInTradeDeals = true;
 
-    public string Name = "";
-
-    public List<ThingWithComps> temp;
+    private List<ThingWithComps> temp;
 
     public Building_WeaponStorage()
     {
@@ -53,21 +54,12 @@ public class Building_WeaponStorage : Building_Storage
             return false;
         }
 
-        if (value == null)
+        if (value != null)
         {
-            StoredWeapons.Remove(thingDef);
-        }
-        else
-        {
-            foreach (var item in value)
-            {
-                if (filter.Allows(item))
-                {
-                    return true;
-                }
-            }
+            return value.Any(filter.Allows);
         }
 
+        StoredWeapons.Remove(thingDef);
         return false;
     }
 
@@ -97,7 +89,7 @@ public class Building_WeaponStorage : Building_Storage
     {
         try
         {
-            Dispose();
+            dispose();
             base.Destroy(mode);
         }
         catch (Exception ex)
@@ -110,7 +102,7 @@ public class Building_WeaponStorage : Building_Storage
     {
         try
         {
-            Dispose();
+            dispose();
             base.DeSpawn(mode);
         }
         catch (Exception ex)
@@ -125,7 +117,7 @@ public class Building_WeaponStorage : Building_Storage
         return t != null && settings.AllowedToAccept(t);
     }
 
-    private void Dispose()
+    private void dispose()
     {
         try
         {
@@ -258,17 +250,7 @@ public class Building_WeaponStorage : Building_Storage
 
     public override void Notify_ReceivedThing(Thing newItem)
     {
-        if (!AllowAdds)
-        {
-            if (!newItem.Spawned)
-            {
-                DropThing(newItem);
-            }
-
-            return;
-        }
-
-        if ((newItem is not ThingWithComps withComps || !withComps.def.IsWeapon) &&
+        if (!AllowAdds || (newItem is not ThingWithComps withComps || !withComps.def.IsWeapon) &&
             !CombatExtendedUtil.IsAmmo(newItem))
         {
             if (!newItem.Spawned)
@@ -301,7 +283,7 @@ public class Building_WeaponStorage : Building_Storage
         return Contains(t, CompBiocodable.IsBiocoded(t) ? StoredBioEncodedWeapons : StoredWeapons);
     }
 
-    private bool Contains(ThingWithComps t, Dictionary<ThingDef, LinkedList<ThingWithComps>> storage)
+    private static bool Contains(ThingWithComps t, Dictionary<ThingDef, LinkedList<ThingWithComps>> storage)
     {
         if (t != null && storage.TryGetValue(t.def, out var value))
         {
@@ -368,30 +350,18 @@ public class Building_WeaponStorage : Building_Storage
         var num = 0;
         foreach (var value in StoredWeapons.Values)
         {
-            foreach (var item in (IEnumerable<ThingWithComps>)value)
-            {
-                if (Allows(item, expectedDef, qualityRange, hpRange, ingredientFilter))
-                {
-                    num++;
-                }
-            }
+            num += value.Count(thing => Allows(thing, expectedDef, qualityRange, hpRange, ingredientFilter));
         }
 
         foreach (var value2 in StoredBioEncodedWeapons.Values)
         {
-            foreach (var item2 in (IEnumerable<ThingWithComps>)value2)
-            {
-                if (Allows(item2, expectedDef, qualityRange, hpRange, ingredientFilter))
-                {
-                    num++;
-                }
-            }
+            num += value2.Count(thing => Allows(thing, expectedDef, qualityRange, hpRange, ingredientFilter));
         }
 
         return num;
     }
 
-    private bool Allows(Thing t, ThingDef expectedDef, QualityRange qualityRange, FloatRange hpRange,
+    private static bool Allows(Thing t, ThingDef expectedDef, QualityRange qualityRange, FloatRange hpRange,
         ThingFilter filter)
     {
         if (t.def != expectedDef)
@@ -445,7 +415,7 @@ public class Building_WeaponStorage : Building_Storage
         return gotten != null;
     }
 
-    private void GetFilteredWeaponsFromStorage(Bill bill, ThingFilter filter, List<ThingWithComps> gotten,
+    private static void GetFilteredWeaponsFromStorage(Bill bill, ThingFilter filter, List<ThingWithComps> gotten,
         KeyValuePair<ThingDef, LinkedList<ThingWithComps>> kv)
     {
         if (!filter.Allows(kv.Key))
@@ -453,12 +423,9 @@ public class Building_WeaponStorage : Building_Storage
             return;
         }
 
-        foreach (var item in kv.Value)
+        foreach (var item in kv.Value.Where(item => bill.IsFixedOrAllowedIngredient(item) && filter.Allows(item)))
         {
-            if (bill.IsFixedOrAllowedIngredient(item) && filter.Allows(item))
-            {
-                gotten.Add(item);
-            }
+            gotten.Add(item);
         }
     }
 
@@ -534,10 +501,10 @@ public class Building_WeaponStorage : Building_Storage
             forceAddedWeapons ??= [];
         }
 
-        Scribe_Collections.Look(ref temp, false, "storedWeapons", LookMode.Deep);
+        Scribe_Collections.Look(ref temp, "storedWeapons", LookMode.Deep);
         Scribe_Values.Look(ref includeInTradeDeals, "includeInTradeDeals", true);
         Scribe_Values.Look(ref IncludeInSharedWeapons, "includeInSharedWeapons", true);
-        Scribe_Collections.Look(ref forceAddedWeapons, false, "forceAddedWeapons", LookMode.Deep);
+        Scribe_Collections.Look(ref forceAddedWeapons, "forceAddedWeapons", LookMode.Deep);
         Scribe_Values.Look(ref Name, "name", "");
         if (Scribe.mode == LoadSaveMode.ResolvingCrossRefs)
         {
@@ -697,7 +664,7 @@ public class Building_WeaponStorage : Building_Storage
     public override IEnumerable<Gizmo> GetGizmos()
     {
         var gizmos = base.GetGizmos();
-        var list = gizmos == null ? new List<Gizmo>(1) : [..gizmos];
+        var list = gizmos == null ? new List<Gizmo>(1) : [.. gizmos];
         var hashCode = "WeaponStorage".GetHashCode();
         if (Settings.EnableAssignWeapons)
         {
@@ -795,16 +762,10 @@ public class Building_WeaponStorage : Building_Storage
         }
 
         var hashSet = AllowedDefsFI.GetValue(filter) as HashSet<ThingDef>;
-        foreach (var item in (HashSet<ThingDef>)AllowedDefsFI.GetValue(previousStorageFilters))
-        {
-            if (hashSet != null && !hashSet.Contains(item))
-            {
-                return false;
-            }
-        }
-
-        return true;
+        var allowed = (HashSet<ThingDef>)AllowedDefsFI.GetValue(previousStorageFilters);
+        return allowed != null && allowed.All(item => hashSet != null && hashSet.Contains(item));
     }
+
 
     private void UpdatePreviousStorageFilter()
     {

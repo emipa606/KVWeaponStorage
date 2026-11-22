@@ -26,7 +26,7 @@ public class Settings : ModSettings
 
     private static string RepairAttachmentMendingSpeedBuffer = 1.ToString();
 
-    public static float RepairAttachmentUpdateInterval = 5f;
+    private static float RepairAttachmentUpdateInterval = 5f;
 
     private static string repairAttachmentUpdateIntervalBuffer = 5f.ToString();
 
@@ -60,40 +60,42 @@ public class Settings : ModSettings
     public static void DoSettingsWindowContents(Rect rect)
     {
         var num = 40f;
-        Widgets.Label(new Rect(0f, num, 250f, 30f), "WeaponStorage.ShowButtonForPawns".Translate());
-        Widgets.Checkbox(new Vector2(260f, num + 4f), ref ShowWeaponStorageButtonForPawns);
+        Widgets.Label(new Rect(0f, num, FIRST_COLUMN_WIDTH, 30f), "WeaponStorage.ShowButtonForPawns".Translate());
+        Widgets.Checkbox(new Vector2(SECOND_COLUMN_X, num + 4f), ref ShowWeaponStorageButtonForPawns);
         num += 32f;
-        Widgets.Label(new Rect(0f, num, 250f, 30f), "WeaponStorage.ShowWeaponsWhenNotDrafted".Translate());
-        Widgets.Checkbox(new Vector2(260f, num + 4f), ref ShowWeaponsWhenNotDrafted);
+        Widgets.Label(new Rect(0f, num, FIRST_COLUMN_WIDTH, 30f),
+            "WeaponStorage.ShowWeaponsWhenNotDrafted".Translate());
+        Widgets.Checkbox(new Vector2(SECOND_COLUMN_X, num + 4f), ref ShowWeaponsWhenNotDrafted);
         num += 32f;
         num += 20f;
-        Widgets.Label(new Rect(0f, num, 250f, 30f), "WeaponStorage.RepairAttachmentSettings".Translate());
+        Widgets.Label(new Rect(0f, num, FIRST_COLUMN_WIDTH, 30f), "WeaponStorage.RepairAttachmentSettings".Translate());
         num += 32f;
         NumberInput(ref num, "WeaponStorage.SecondsBetweenTicks", ref RepairAttachmentUpdateInterval,
-            ref repairAttachmentUpdateIntervalBuffer, 5f, 0.25f, 120f);
+            ref repairAttachmentUpdateIntervalBuffer, DEFAULT_REPAIR_UPDATE_INTERVAL, 0.25f, 120f);
         NumberInput(ref num, "WeaponStorage.HPPerTick", ref RepairAttachmentMendingSpeed,
-            ref RepairAttachmentMendingSpeedBuffer, 1, 1, 60);
+            ref RepairAttachmentMendingSpeedBuffer, DEFAULT_REPAIR_SPEED, 1, 60);
         num += 20f;
-        Widgets.Label(new Rect(0f, num, 250f, 30f), "WeaponStorage.AllowPawnsToDropWeapon".Translate());
-        Widgets.Checkbox(new Vector2(260f, num + 4f), ref AllowPawnsToDropWeapon);
+        Widgets.Label(new Rect(0f, num, FIRST_COLUMN_WIDTH, 30f), "WeaponStorage.AllowPawnsToDropWeapon".Translate());
+        Widgets.Checkbox(new Vector2(SECOND_COLUMN_X, num + 4f), ref AllowPawnsToDropWeapon);
         num += 32f;
-        Widgets.Label(new Rect(0f, num, 250f, 30f), "WeaponStorage.PlaceDroppedWeaponsInStorage".Translate());
-        Widgets.Checkbox(new Vector2(260f, num + 4f), ref PlaceDroppedWeaponsInStorage);
+        Widgets.Label(new Rect(0f, num, FIRST_COLUMN_WIDTH, 30f),
+            "WeaponStorage.PlaceDroppedWeaponsInStorage".Translate());
+        Widgets.Checkbox(new Vector2(SECOND_COLUMN_X, num + 4f), ref PlaceDroppedWeaponsInStorage);
         num += 32f;
-        Widgets.Label(new Rect(0f, num, 250f, 30f), "WeaponStorage.EnableAssignWeapons".Translate());
-        Widgets.Checkbox(new Vector2(260f, num + 4f), ref EnableAssignWeapons);
+        Widgets.Label(new Rect(0f, num, FIRST_COLUMN_WIDTH, 30f), "WeaponStorage.EnableAssignWeapons".Translate());
+        Widgets.Checkbox(new Vector2(SECOND_COLUMN_X, num + 4f), ref EnableAssignWeapons);
         Widgets.Label(new Rect(310f, num, 200f, 30f), "WeaponStorage.UnassignAllWeaponsFirst".Translate());
         num += 32f;
-        Widgets.Label(new Rect(0f, num, 250f, 30f), "WeaponStorage.AutoSwitchMeleeForTarget".Translate());
-        Widgets.Checkbox(new Vector2(260f, num + 4f), ref AutoSwitchMelee);
+        Widgets.Label(new Rect(0f, num, FIRST_COLUMN_WIDTH, 30f), "WeaponStorage.AutoSwitchMeleeForTarget".Translate());
+        Widgets.Checkbox(new Vector2(SECOND_COLUMN_X, num + 4f), ref AutoSwitchMelee);
         num += 32f;
         if (!AutoSwitchMelee)
         {
             return;
         }
 
-        Widgets.Label(new Rect(0f, num, 250f, 30f), "WeaponStorage.PreferredDamageType".Translate());
-        if (!Widgets.ButtonText(new Rect(260f, num, 100f, 30f), PreferredDamageType.ToString().Translate()))
+        Widgets.Label(new Rect(0f, num, FIRST_COLUMN_WIDTH, 30f), "WeaponStorage.PreferredDamageType".Translate());
+        if (!Widgets.ButtonText(new Rect(SECOND_COLUMN_X, num, 100f, 30f), PreferredDamageType.ToString().Translate()))
         {
             return;
         }
@@ -101,19 +103,19 @@ public class Settings : ModSettings
         var list = new List<FloatMenuOption>();
         if (PreferredDamageType != 0)
         {
-            list.Add(new FloatMenuOption(PreferredDamageTypeEnum.WeaponStorage_None.ToString().Translate(),
+            list.Add(new FloatMenuOption(nameof(PreferredDamageTypeEnum.WeaponStorage_None).Translate(),
                 delegate { PreferredDamageType = PreferredDamageTypeEnum.WeaponStorage_None; }));
         }
 
         if (PreferredDamageType != PreferredDamageTypeEnum.ArmorBlunt)
         {
-            list.Add(new FloatMenuOption(PreferredDamageTypeEnum.ArmorBlunt.ToString().Translate(),
+            list.Add(new FloatMenuOption(nameof(PreferredDamageTypeEnum.ArmorBlunt).Translate(),
                 delegate { PreferredDamageType = PreferredDamageTypeEnum.ArmorBlunt; }));
         }
 
         if (PreferredDamageType != PreferredDamageTypeEnum.ArmorSharp)
         {
-            list.Add(new FloatMenuOption(PreferredDamageTypeEnum.ArmorSharp.ToString().Translate(),
+            list.Add(new FloatMenuOption(nameof(PreferredDamageTypeEnum.ArmorSharp).Translate(),
                 delegate { PreferredDamageType = PreferredDamageTypeEnum.ArmorSharp; }));
         }
 
@@ -125,7 +127,7 @@ public class Settings : ModSettings
         return t != null && IsTool(t.def);
     }
 
-    public static bool IsTool(ThingDef def)
+    private static bool IsTool(ThingDef def)
     {
         return def?.defName.StartsWith("RTFTJ") ?? false;
     }
@@ -135,7 +137,7 @@ public class Settings : ModSettings
     {
         try
         {
-            Widgets.Label(new Rect(20f, y, 250f, 30f), label.Translate());
+            Widgets.Label(new Rect(20f, y, FIRST_COLUMN_WIDTH, 30f), label.Translate());
             Widgets.TextFieldNumeric(new Rect(280f, y, 50f, 30f), ref val, ref buffer, min, max);
             if (Widgets.ButtonText(new Rect(340f, y, 100f, 30f), "ResetButton".Translate()))
             {
@@ -157,7 +159,7 @@ public class Settings : ModSettings
     {
         try
         {
-            Widgets.Label(new Rect(20f, y, 250f, 30f), label.Translate());
+            Widgets.Label(new Rect(20f, y, FIRST_COLUMN_WIDTH, 30f), label.Translate());
             Widgets.TextFieldNumeric(new Rect(280f, y, 50f, 30f), ref val, ref buffer, min, max);
             if (Widgets.ButtonText(new Rect(340f, y, 100f, 30f), "ResetButton".Translate()))
             {

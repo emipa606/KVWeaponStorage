@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -10,7 +11,7 @@ internal class SharedWeaponsUI : Window
     private float lastX;
 
     private float lastY;
-    private Vector2 scrollPosition = new Vector2(0f, 0f);
+    private Vector2 scrollPosition = new(0f, 0f);
 
     private SharedWeaponFilter selectedFilter;
 
@@ -24,7 +25,7 @@ internal class SharedWeaponsUI : Window
         pawns = Util.GetPawns(true);
     }
 
-    public override Vector2 InitialSize => new Vector2(800f, 600f);
+    public override Vector2 InitialSize => new(800f, 600f);
 
     public override void DoWindowContents(Rect inRect)
     {
@@ -118,23 +119,23 @@ internal class SharedWeaponsUI : Window
         Widgets.BeginScrollView(new Rect(num2, num, inRect.width - num3 - 20f, inRect.height - num - 60f),
             ref scrollPosition, new Rect(0f, 0f, lastX, lastY));
         num4 = 0f;
-        foreach (var pawn2 in pawns)
+        foreach (var pawn2 in pawns.Select(p => p.Pawn))
         {
             num2 = 0f;
-            foreach (var item2 in WorldComp.SharedWeaponFilter)
+            foreach (var item2 in WorldComp.SharedWeaponFilter.Select(p => p.AssignedPawns))
             {
-                var contains = item2.AssignedPawns.Contains(pawn2.Pawn);
+                var contains = item2.Contains(pawn2);
                 var checkOn = contains;
                 Widgets.Checkbox(new Vector2(num2, num4 + 2f), ref checkOn, 26f);
                 if (checkOn != contains)
                 {
                     if (checkOn)
                     {
-                        item2.AssignedPawns.Add(pawn2.Pawn);
+                        item2.Add(pawn2);
                     }
                     else
                     {
-                        item2.AssignedPawns.Remove(pawn2.Pawn);
+                        item2.Remove(pawn2);
                     }
                 }
 

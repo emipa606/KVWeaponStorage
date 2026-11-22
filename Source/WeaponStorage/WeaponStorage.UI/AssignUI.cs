@@ -29,23 +29,23 @@ public class AssignUI : Window
 
     public static readonly Texture2D ammoTexture;
 
-    public static readonly Texture2D nextTexture;
+    private static readonly Texture2D nextTexture;
 
-    public static readonly Texture2D previousTexture;
+    private static readonly Texture2D previousTexture;
 
     public static readonly Texture2D weaponStorageTexture;
 
     private readonly List<SelectablePawns> selectablePawns;
 
-    private AssignedWeaponContainer assignedWeapons;
-
-    private int pawnIndex = -1;
-
     private List<ThingWithComps> PossibleWeapons;
 
     private float PreviousY;
 
-    private Vector2 scrollPosition = new Vector2(0f, 0f);
+    private AssignedWeaponContainer assignedWeapons;
+
+    private int pawnIndex = -1;
+
+    private Vector2 scrollPosition = new(0f, 0f);
 
     private string textBuffer = "";
 
@@ -81,7 +81,7 @@ public class AssignUI : Window
         UpdatePawnIndex(pawn);
     }
 
-    public override Vector2 InitialSize => new Vector2(650f, 600f);
+    public override Vector2 InitialSize => new(650f, 600f);
 
     private void RebuildPossibleWeapons()
     {
@@ -424,7 +424,7 @@ public class AssignUI : Window
                 i += increment;
                 if (i < 0)
                 {
-                    weaponStorage = weaponStorages[weaponStorages.Count - 1];
+                    weaponStorage = weaponStorages[^1];
                 }
                 else if (i >= weaponStorages.Count)
                 {

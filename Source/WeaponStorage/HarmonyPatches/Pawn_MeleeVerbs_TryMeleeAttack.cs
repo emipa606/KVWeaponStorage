@@ -11,7 +11,7 @@ internal static class Pawn_MeleeVerbs_TryMeleeAttack
     private static readonly Dictionary<Def, DT> weaponDamageTypes = new();
 
     [HarmonyPriority(800)]
-    private static void Postfix(Pawn_MeleeVerbs __instance, Thing target)
+    public static void Postfix(Pawn_MeleeVerbs __instance, Thing target)
     {
         if (!Settings.AutoSwitchMelee)
         {

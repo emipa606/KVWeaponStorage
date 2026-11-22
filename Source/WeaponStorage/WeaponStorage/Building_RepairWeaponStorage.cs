@@ -19,7 +19,7 @@ internal class Building_RepairWeaponStorage : Building
 
     private ThingWithComps beingRepaird;
 
-    public CompPowerTrader compPowerTrader;
+    private CompPowerTrader compPowerTrader;
 
     private AssignedWeaponContainer container;
 
@@ -69,14 +69,14 @@ internal class Building_RepairWeaponStorage : Building
     {
         base.SpawnSetup(map, respawningAfterLoad);
         compPowerTrader = GetComp<CompPowerTrader>();
-        compPowerTrader.PowerOutput = -10f;
+        compPowerTrader.PowerOutput = -LOW_POWER_COST;
         foreach (var item in BuildingUtil.FindThingsOfTypeNextTo<Building_WeaponStorage>(Map, Position,
                      Settings.RepairAttachmentDistance))
         {
             Add(item);
         }
 
-        compPowerTrader.powerStartedAction = delegate { compPowerTrader.PowerOutput = 10f; };
+        compPowerTrader.powerStartedAction = delegate { compPowerTrader.PowerOutput = LOW_POWER_COST; };
         compPowerTrader.powerStoppedAction = delegate
         {
             StopRepairing();
@@ -105,7 +105,7 @@ internal class Building_RepairWeaponStorage : Building
         AttachedWeaponStorages.Clear();
     }
 
-    public override void Tick()
+    protected override void Tick()
     {
         TickRare();
         var ticks = DateTime.Now.Ticks;
@@ -124,7 +124,7 @@ internal class Building_RepairWeaponStorage : Building
         }
         else if (beingRepaird == null)
         {
-            if (ticks - lastSearch > 300000000)
+            if (ticks - lastSearch > THIRTY_SECONDS)
             {
                 lastSearch = ticks;
                 StartRepairing();
@@ -148,11 +148,11 @@ internal class Building_RepairWeaponStorage : Building
 
             var num = GenTemperature.ControlTemperatureTempChange(Position, Map, 10f, float.MaxValue);
             this.GetRoom().Temperature += num;
-            compPowerTrader.PowerOutput = 0f - compPowerTrader.Props.basePowerConsumption;
+            compPowerTrader.PowerOutput = 0f - compPowerTrader.Props.PowerConsumption;
         }
         else
         {
-            compPowerTrader.PowerOutput = 10f;
+            compPowerTrader.PowerOutput = LOW_POWER_COST;
         }
     }
 

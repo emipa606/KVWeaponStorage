@@ -8,7 +8,7 @@ namespace WeaponStorage;
 [HarmonyPatch(typeof(RecipeWorkerCounter), nameof(RecipeWorkerCounter.CountProducts))]
 internal static class RecipeWorkerCounter_CountProducts
 {
-    private static void Postfix(ref int __result, RecipeWorkerCounter __instance, Bill_Production bill)
+    public static void Postfix(ref int __result, RecipeWorkerCounter __instance, Bill_Production bill)
     {
         var products = __instance.recipe.products;
         if (!WorldComp.GetWeaponStorages(bill?.Map).Any() || products == null)
@@ -16,9 +16,8 @@ internal static class RecipeWorkerCounter_CountProducts
             return;
         }
 
-        foreach (var item in products)
+        foreach (var thingDef in products.Select(p => p.thingDef))
         {
-            var thingDef = item.thingDef;
             if (!thingDef.IsWeapon)
             {
                 continue;

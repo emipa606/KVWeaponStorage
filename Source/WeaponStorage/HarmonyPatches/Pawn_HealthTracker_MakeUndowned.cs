@@ -4,11 +4,11 @@ using Verse;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(Pawn_HealthTracker), nameof(Pawn_HealthTracker.MakeUndowned))]
+[HarmonyPatch(typeof(Pawn_HealthTracker), "MakeUndowned")]
 internal static class Pawn_HealthTracker_MakeUndowned
 {
     [HarmonyPriority(800)]
-    private static void Prefix(Pawn ___pawn)
+    public static void Prefix(Pawn ___pawn)
     {
         if (!Settings.EnableAssignWeapons)
         {

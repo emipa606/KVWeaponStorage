@@ -10,7 +10,7 @@ namespace MendingWeaponStoragePatch;
 [HarmonyPatch(typeof(WorkGiver_DoBill), "TryFindBestBillIngredients")]
 internal static class WorkGiver_DoBill_TryFindBestBillIngredients
 {
-    private static void Postfix(ref bool __result, Bill bill, Pawn pawn, Thing billGiver, List<ThingCount> chosen)
+    public static void Postfix(ref bool __result, Bill bill, Pawn pawn, Thing billGiver, List<ThingCount> chosen)
     {
         if (__result || pawn == null || bill?.recipe == null || bill.Map != pawn.Map ||
             bill.recipe.defName.Contains("Weapon"))

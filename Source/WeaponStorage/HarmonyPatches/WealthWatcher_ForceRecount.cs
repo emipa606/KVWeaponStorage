@@ -9,7 +9,7 @@ namespace WeaponStorage;
 [HarmonyPatch(typeof(WealthWatcher), nameof(WealthWatcher.ForceRecount))]
 public static class WealthWatcher_ForceRecount
 {
-    private static void Postfix(WealthWatcher __instance)
+    public static void Postfix(WealthWatcher __instance)
     {
         var map = (Map)__instance.GetType().GetField("map", BindingFlags.Instance | BindingFlags.NonPublic)
             ?.GetValue(__instance);
@@ -19,7 +19,7 @@ public static class WealthWatcher_ForceRecount
             return;
         }
 
-        var num = TallyWealth(wealthItems: (float)field.GetValue(__instance),
+        var num = TallyWealth(wealthItems: (float)(field.GetValue(__instance) ?? 0),
             storages: WorldComp.GetWeaponStorages(map));
         field.SetValue(__instance, num);
     }

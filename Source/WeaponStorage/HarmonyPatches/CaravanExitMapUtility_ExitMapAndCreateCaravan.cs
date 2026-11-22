@@ -12,7 +12,7 @@ namespace WeaponStorage;
 internal static class CaravanExitMapUtility_ExitMapAndCreateCaravan
 {
     [HarmonyPriority(800)]
-    private static void Prefix(IEnumerable<Pawn> pawns, Faction faction)
+    public static void Prefix(IEnumerable<Pawn> pawns, Faction faction)
     {
         if (faction != Faction.OfPlayer || new List<Pawn>(pawns).Count <= 0)
         {

@@ -7,4 +7,16 @@
   </Configurations>
   <Project Path="MendingWeaponStoragePatch/MendingWeaponStoragePatch.csproj" />
   <Project Path="WeaponStorage/WeaponStorage.csproj" />
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/ResearchProjectDefs/">
+    <File Path="../1.7/Defs/ResearchProjectDefs/ResearchProjects.xml" />
+  </Folder>
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/WeaponStorage.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/ThingDefs/">
+    <File Path="../1.7/Defs/ThingDefs/Furniture.xml" />
+  </Folder>
 </Solution>

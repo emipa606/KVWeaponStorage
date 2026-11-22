@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -14,11 +15,11 @@ public class AmmoUI : Window
     private readonly List<ThingDefCount> searchResults = [];
     private readonly Building_WeaponStorage weaponStorage;
 
-    private bool performSearch;
-
     private float PreviousY;
 
-    private Vector2 scrollPosition = new Vector2(0f, 0f);
+    private bool performSearch;
+
+    private Vector2 scrollPosition = new(0f, 0f);
 
     private string searchText = "";
 
@@ -33,7 +34,7 @@ public class AmmoUI : Window
         RebuildItems();
     }
 
-    public override Vector2 InitialSize => new Vector2(650f, 600f);
+    public override Vector2 InitialSize => new(650f, 600f);
 
     private void RebuildItems()
     {
@@ -125,13 +126,11 @@ public class AmmoUI : Window
             if (!searchText.Trim().NullOrEmpty())
             {
                 var value = searchText.ToLower().Trim();
-                foreach (var item in ammo)
+                foreach (var item in ammo.Where(item =>
+                             item.ThingDef.label.ToLower().Contains(value) ||
+                             item.ThingDef.defName.ToLower().Contains(value)))
                 {
-                    if (item.ThingDef.label.ToLower().Contains(value) ||
-                        item.ThingDef.defName.ToLower().Contains(value))
-                    {
-                        searchResults.Add(item);
-                    }
+                    searchResults.Add(item);
                 }
             }
         }

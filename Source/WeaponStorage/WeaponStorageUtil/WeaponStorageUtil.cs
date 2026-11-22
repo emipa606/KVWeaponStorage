@@ -6,17 +6,15 @@ using Verse;
 
 namespace WeaponStorageUtil;
 
-internal class WeaponStorageUtil
+internal static class WeaponStorageUtil
 {
     private static Assembly wsAssembly;
 
-    private static bool initialized;
-
-    public static bool Exists
+    private static bool Exists
     {
         get
         {
-            if (initialized)
+            if (field)
             {
                 return wsAssembly != null;
             }
@@ -25,24 +23,25 @@ internal class WeaponStorageUtil
             {
                 foreach (var loadedAssembly in runningMod.assemblies.loadedAssemblies)
                 {
-                    if (!loadedAssembly.GetName().Name.Equals("WeaponStorage") ||
-                        loadedAssembly.GetType("WeaponStorage.WorldComp") == null)
+                    var name = loadedAssembly.GetName().Name;
+                    if (name != null && (!name.Equals("WeaponStorage") ||
+                                         loadedAssembly.GetType("WeaponStorage.WorldComp") == null))
                     {
                         continue;
                     }
 
-                    initialized = true;
+                    field = true;
                     wsAssembly = loadedAssembly;
                     break;
                 }
 
-                if (initialized)
+                if (field)
                 {
                     break;
                 }
             }
 
-            initialized = true;
+            field = true;
 
             return wsAssembly != null;
         }
@@ -58,7 +57,7 @@ internal class WeaponStorageUtil
         try
         {
             if (wsAssembly.GetType("WeaponStorage.WorldComp")
-                    .GetField("AssignedWeapons", BindingFlags.Static | BindingFlags.Public)
+                    ?.GetField("AssignedWeapons", BindingFlags.Static | BindingFlags.Public)
                     ?.GetValue(null) is IDictionary dictionary)
             {
                 var obj = dictionary[p];
@@ -73,7 +72,7 @@ internal class WeaponStorageUtil
                         }
 
                         wsAssembly.GetType("WeaponStorage.HarmonyPatchUtil")
-                            .GetMethod("EquipWeapon", BindingFlags.Static | BindingFlags.Public)
+                            ?.GetMethod("EquipWeapon", BindingFlags.Static | BindingFlags.Public)
                             ?.Invoke(null, [item, p, obj]);
                         return true;
                     }

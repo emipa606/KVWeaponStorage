@@ -7,7 +7,7 @@ using Verse;
 namespace MendingWeaponStoragePatch;
 
 [StaticConstructorOnStartup]
-internal class HarmonyPatches_Mending
+internal static class HarmonyPatches_Mending
 {
     static HarmonyPatches_Mending()
     {

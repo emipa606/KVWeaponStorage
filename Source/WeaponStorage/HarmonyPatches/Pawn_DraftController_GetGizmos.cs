@@ -9,11 +9,11 @@ using WeaponStorage.UI;
 
 namespace WeaponStorage;
 
-[HarmonyPatch(typeof(Pawn_DraftController), nameof(Pawn_DraftController.GetGizmos))]
+[HarmonyPatch(typeof(Pawn_DraftController), "GetGizmos")]
 public static class Pawn_DraftController_GetGizmos
 {
     [HarmonyPriority(600)]
-    private static void Postfix(Pawn_DraftController __instance, ref IEnumerable<Gizmo> __result)
+    public static void Postfix(Pawn_DraftController __instance, ref IEnumerable<Gizmo> __result)
     {
         try
         {
@@ -34,31 +34,20 @@ public static class Pawn_DraftController_GetGizmos
                         defaultLabel = "WeaponStorage.UseWeaponStorage".Translate(),
                         activateSound = SoundDef.Named("Click"),
                         action = delegate { Find.WindowStack.Add(new AssignUI(null, pawn)); }
-                    }
+                    },
+
+                    .. __result
                 ];
-                list.AddRange(__result);
             }
 
             if (WorldComp.TryGetAssignedWeapons(__instance.pawn, out var weapons))
             {
-                if (list == null)
-                {
-                    list = [];
-                    list.AddRange(__result);
-                }
+                list ??= [.. __result];
 
                 foreach (var weapon in weapons.Weapons)
                 {
                     var isTool = Settings.IsTool(weapon);
-                    var showWeapon = false;
-                    if (pawn.Drafted)
-                    {
-                        showWeapon = true;
-                    }
-                    else if (isTool || Settings.ShowWeaponsWhenNotDrafted)
-                    {
-                        showWeapon = true;
-                    }
+                    var showWeapon = pawn.Drafted || isTool || Settings.ShowWeaponsWhenNotDrafted;
 
                     if (showWeapon)
                     {
@@ -78,11 +67,7 @@ public static class Pawn_DraftController_GetGizmos
 
             foreach (var f in WorldComp.SharedWeaponFilter)
             {
-                if (list == null)
-                {
-                    list = [];
-                    list.AddRange(__result);
-                }
+                list ??= [.. __result];
 
                 f.UpdateFoundDefCache();
                 if (!f.AssignedPawns.Contains(pawn))
